@@ -37,3 +37,7 @@ Process:
 4. Implemented constructors, getters, and setters
 5. Added toString() method for debugging purposes
 
+### 2024-07-02
+
+- Created AlbumRepository interface
+- Implemented custom query for case-insensitive title search
