@@ -41,3 +41,19 @@ Process:
 
 - Created AlbumRepository interface
 - Implemented custom query for case-insensitive title search
+
+### 2024-07-03
+
+- Extended AlbumRepository with additional query methods
+- Learned and implemented various JPA query techniques:
+    1. Method name queries (e.g., findByArtistIgnoreCase, findByReleaseYear)
+    2. Custom JPQL queries using @Query annotation
+    3. Named parameters in custom queries with @Param
+    4. Advanced query operations:
+        - Case-insensitive search
+        - Date range queries
+        - Aggregation functions (COUNT)
+        - Sorting and pagination (for top N results)
+    5. Combined criteria queries (e.g., findByArtistAndReleaseYearAfter)
+- Practiced writing both derived query methods and custom JPQL queries
+- Explored different ways to optimize search functionality in the repository
