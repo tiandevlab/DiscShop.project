@@ -57,3 +57,13 @@ Process:
     5. Combined criteria queries (e.g., findByArtistAndReleaseYearAfter)
 - Practiced writing both derived query methods and custom JPQL queries
 - Explored different ways to optimize search functionality in the repository
+
+### 2024-07-04
+
+- Started implementation of AlbumController using Spring Boot
+- Created basic structure for the REST controller class
+- Implemented getAllAlbums method to retrieve all albums
+- Learning and exploring Spring Boot concepts:
+    1. Understanding the role of @RestController in creating RESTful web services
+    2. Studying the use of Spring Boot annotations like @GetMapping
+    3. Exploring the relationship between controllers and repositories in a Spring Boot application
