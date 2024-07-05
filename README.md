@@ -67,3 +67,7 @@ Process:
     1. Understanding the role of @RestController in creating RESTful web services
     2. Studying the use of Spring Boot annotations like @GetMapping
     3. Exploring the relationship between controllers and repositories in a Spring Boot application
+
+### 2024-07-05
+- Implemented basic CRUD operations in AlbumController
+- Created endpoints for GET, POST, PUT, and DELETE operations
