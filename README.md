@@ -71,3 +71,15 @@ Process:
 ### 2024-07-05
 - Implemented basic CRUD operations in AlbumController
 - Created endpoints for GET, POST, PUT, and DELETE operations
+
+### 2024-07-08
+
+- Enhanced AlbumController with additional query methods:
+    1. Implemented search functionality for albums by title or artist
+    2. Added endpoint to find albums by specific artist
+    3. Created method to retrieve albums by release year
+    4. Implemented price range search for albums
+    5. Added functionality to find albums by artist released after a specific year
+    6. Created endpoint to count albums by artist
+    7. Implemented method to get top expensive albums
+- Utilized existing AlbumRepository methods to support new controller functionalities
