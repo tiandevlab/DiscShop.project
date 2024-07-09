@@ -83,3 +83,9 @@ Process:
     6. Created endpoint to count albums by artist
     7. Implemented method to get top expensive albums
 - Utilized existing AlbumRepository methods to support new controller functionalities
+
+### 2024-07-09
+
+- Learned about and implemented ServletInitializer for traditional Servlet container deployment
+- Explored Spring Boot application deployment options
+- Continued to enhance understanding of Spring Boot project structure
