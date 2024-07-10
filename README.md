@@ -89,3 +89,16 @@ Process:
 - Learned about and implemented ServletInitializer for traditional Servlet container deployment
 - Explored Spring Boot application deployment options
 - Continued to enhance understanding of Spring Boot project structure
+
+### 2024-07-10
+
+- Deepened understanding of entity classes and their importance in the project structure
+    1. Learned how entity classes map database tables to Java objects
+    2. Explored the role of annotations in defining relationships and constraints
+- Updated database structure to include user management and shopping cart functionality
+    1. Added new tables: users, user_roles, shopping_carts, and cart_items
+    2. Included sample data in the init.sql script for testing purposes
+- Implemented the User entity class
+    1. Created User.java with necessary fields and annotations
+    2. Established relationships with roles and shopping carts
+- Gained insights into JPA (Java Persistence API) and its role in ORM (Object-Relational Mapping)
