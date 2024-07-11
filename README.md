@@ -105,3 +105,9 @@ Process:
     1. Created User.java with necessary fields and annotations
     2. Established relationships with roles and shopping carts
 - Gained insights into JPA (Java Persistence API) and its role in ORM (Object-Relational Mapping)
+
+### 2024-07-11
+
+- Created CartItem entity class
+- Implemented JPA annotations for CartItem entity
+- Continued learning and familiarizing with Spring Boot annotations and structure
