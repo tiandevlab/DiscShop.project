@@ -111,3 +111,14 @@ Process:
 - Created CartItem entity class
 - Implemented JPA annotations for CartItem entity
 - Continued learning and familiarizing with Spring Boot annotations and structure
+
+### 2024-07-12
+
+- Created new classes: ShoppingCart
+- Learned about relationships between classes in Spring Boot:
+  1. Discovered how to connect different parts of my online shop (like users, carts, and albums)
+  2. Used annotations like @ManyToOne and @OneToMany to show these connections
+- Started to understand how to represent a shopping cart in my application:
+  1. ShoppingCart class to represent a user's cart
+  2. CartItem class to represent individual items in the cart
+- Practiced using JPA annotations in new classes
