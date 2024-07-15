@@ -122,3 +122,14 @@ Process:
   1. ShoppingCart class to represent a user's cart
   2. CartItem class to represent individual items in the cart
 - Practiced using JPA annotations in new classes
+
+### 2024-07-15
+
+- Created AlbumService interface in the service package
+- Implemented AlbumServiceImpl class in the service.impl package
+- Learned about the importance of separating interface from implementation
+- Understood the benefits of using a service layer:
+  1. Separation of concerns
+  2. Improved testability
+  3. Better code organization
+  4. Enhanced maintainability
