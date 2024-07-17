@@ -139,3 +139,12 @@ Process:
 - Created UserServiceImpl class with CRUD operations
 - Defined UserRepository interface for data access
 - Integrated User service layer with existing project structure
+
+### 2024-07-17
+
+- Implemented CartItemRepository interface
+- Created CartItemService interface and its implementation (CartItemServiceImpl)
+- Learned about the importance of separating concerns in a Spring Boot application:
+  1. Repository layer for data access
+  2. Service layer for business logic
+  3. How these layers interact with each other
