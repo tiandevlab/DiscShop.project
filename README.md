@@ -148,3 +148,11 @@ Process:
   1. Repository layer for data access
   2. Service layer for business logic
   3. How these layers interact with each other
+
+### 2024-07-18
+
+- Implemented ShoppingCartRepository interface
+- Created ShoppingCartService interface and its implementation (ShoppingCartServiceImpl)
+- Completed the service layer for all main entities (Album, User, CartItem, ShoppingCart)
+- Strengthened understanding of the repository-service pattern in Spring Boot applications
+- Practiced implementing custom finder methods and CRUD operations in repositories and services
