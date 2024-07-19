@@ -156,3 +156,13 @@ Process:
 - Completed the service layer for all main entities (Album, User, CartItem, ShoppingCart)
 - Strengthened understanding of the repository-service pattern in Spring Boot applications
 - Practiced implementing custom finder methods and CRUD operations in repositories and services
+
+### 2024-07-19
+
+- Created UserController, CartItemController, and ShoppingCartController
+- Implemented basic CRUD operations for each controller
+- Learned about the role of controllers in handling HTTP requests and responses
+- Understood the importance of RESTful API design principles
+- Gained experience in structuring endpoints for different entities
+- Practiced using Spring annotations such as @RestController, @RequestMapping, @GetMapping, etc.
+
