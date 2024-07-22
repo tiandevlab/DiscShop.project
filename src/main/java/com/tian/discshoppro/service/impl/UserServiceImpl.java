@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
     private UserDTO convertToDTO(User user) {
         return new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getRoles());
+        //Note: We usually do not include passwords in the DTO
     }
 
     private User convertToEntity(UserDTO userDTO) {
@@ -26,6 +27,11 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setRoles(userDTO.getRoles());
+        //Set the password only when creating a new user,
+        //do not set the password directly from the DTO when updating;
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            user.setPassword(userDTO.getPassword());
+        }
         return user;
     }
 
@@ -55,6 +61,10 @@ public class UserServiceImpl implements UserService {
                     existingUser.setUsername(userDTO.getUsername());
                     existingUser.setEmail(userDTO.getEmail());
                     existingUser.setRoles(userDTO.getRoles());
+                    //Only update the password if a new one is provided;
+                    if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+                        existingUser.setPassword(userDTO.getPassword());
+                    }
                     User updatedUser = userRepository.save(existingUser);
                     return convertToDTO(updatedUser);
                 })

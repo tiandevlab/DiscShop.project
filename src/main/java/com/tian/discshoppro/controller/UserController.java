@@ -29,6 +29,9 @@ public class UserController {
 
     @PostMapping
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
+        if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty");
+        }
         return userService.createUser(userDTO);
     }
 

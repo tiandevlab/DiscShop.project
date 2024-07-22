@@ -5,11 +5,21 @@ import java.util.Set;
 public class UserDTO {
     private Long id;
     private String username;
+    private String password;
     private String email;
     private Set<String> roles;
 
-    public UserDTO() {}
+    public UserDTO() {
+    }
 
+    public UserDTO(Long id, String username, String password, String email, Set<String> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+    //This constructor does not contain password field
     public UserDTO(Long id, String username, String email, Set<String> roles) {
         this.id = id;
         this.username = username;
@@ -31,6 +41,14 @@ public class UserDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
