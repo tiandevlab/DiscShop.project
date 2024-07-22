@@ -1,17 +1,13 @@
 package com.tian.discshoppro.service;
 
-import com.tian.discshoppro.model.User;
+import com.tian.discshoppro.model.dto.UserDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> getAllUsers();
-    Optional<User> getUserById(Long id);
-    User createUser(User user);
-    User updateUser(Long id, User userDetails);
+    List<UserDTO> getAllUsers();
+    Optional<UserDTO> getUserById(Long id);
+    UserDTO createUser(UserDTO userDTO);
+    UserDTO updateUser(Long id, UserDTO userDTO);
     void deleteUser(Long id);
-    Optional<User> getUserByUsername(String username);
-    Optional<User> getUserByEmail(String email);
-    boolean existsByUsername(String username);
-    boolean existsByEmail(String email);
 }

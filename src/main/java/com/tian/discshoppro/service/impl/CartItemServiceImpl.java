@@ -1,48 +1,83 @@
 package com.tian.discshoppro.service.impl;
 
 import com.tian.discshoppro.model.CartItem;
+import com.tian.discshoppro.model.dto.CartItemDTO;
 import com.tian.discshoppro.repository.CartItemRepository;
+import com.tian.discshoppro.repository.ShoppingCartRepository;
+import com.tian.discshoppro.repository.AlbumRepository;
 import com.tian.discshoppro.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
-    private final CartItemRepository cartItemRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @Autowired
-    public CartItemServiceImpl(CartItemRepository cartItemRepository) {
-        this.cartItemRepository = cartItemRepository;
+    private ShoppingCartRepository shoppingCartRepository;
+
+    @Autowired
+    private AlbumRepository albumRepository;
+
+    private CartItemDTO convertToDTO(CartItem cartItem) {
+        return new CartItemDTO(
+                cartItem.getId(),
+                cartItem.getCart().getId(),
+                cartItem.getAlbum().getId(),
+                cartItem.getAlbum().getTitle(),
+                cartItem.getQuantity()
+        );
+    }
+
+    private CartItem convertToEntity(CartItemDTO cartItemDTO) {
+        CartItem cartItem = new CartItem();
+        cartItem.setId(cartItemDTO.getId());
+        cartItem.setCart(shoppingCartRepository.findById(cartItemDTO.getCartId()).orElse(null));
+        cartItem.setAlbum(albumRepository.findById(cartItemDTO.getAlbumId()).orElse(null));
+        cartItem.setQuantity(cartItemDTO.getQuantity());
+        return cartItem;
     }
 
     @Override
-    public List<CartItem> getAllCartItems() {
-        return cartItemRepository.findAll();
+    public List<CartItemDTO> getAllCartItems() {
+        return cartItemRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<CartItem> getCartItemById(Long id) {
-        return cartItemRepository.findById(id);
+    public Optional<CartItemDTO> getCartItemById(Long id) {
+        return cartItemRepository.findById(id).map(this::convertToDTO);
     }
 
     @Override
-    public CartItem createCartItem(CartItem cartItem) {
-        return cartItemRepository.save(cartItem);
+    public List<CartItemDTO> getCartItemsByCartId(Long cartId) {
+        return cartItemRepository.findByCartId(cartId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public CartItem updateCartItem(Long id, CartItem cartItemDetails) {
+    public CartItemDTO createCartItem(CartItemDTO cartItemDTO) {
+        CartItem cartItem = convertToEntity(cartItemDTO);
+        CartItem savedCartItem = cartItemRepository.save(cartItem);
+        return convertToDTO(savedCartItem);
+    }
+
+    @Override
+    public CartItemDTO updateCartItem(Long id, CartItemDTO cartItemDTO) {
         return cartItemRepository.findById(id)
                 .map(existingCartItem -> {
-                    existingCartItem.setCart(cartItemDetails.getCart());
-                    existingCartItem.setAlbum(cartItemDetails.getAlbum());
-                    existingCartItem.setQuantity(cartItemDetails.getQuantity());
-                    return cartItemRepository.save(existingCartItem);
+                    existingCartItem.setCart(shoppingCartRepository.findById(cartItemDTO.getCartId()).orElse(null));
+                    existingCartItem.setAlbum(albumRepository.findById(cartItemDTO.getAlbumId()).orElse(null));
+                    existingCartItem.setQuantity(cartItemDTO.getQuantity());
+                    CartItem updatedCartItem = cartItemRepository.save(existingCartItem);
+                    return convertToDTO(updatedCartItem);
                 })
                 .orElse(null);
     }
@@ -50,21 +85,5 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void deleteCartItem(Long id) {
         cartItemRepository.deleteById(id);
-    }
-
-    @Override
-    public List<CartItem> getCartItemsByCartId(Long cartId) {
-        return cartItemRepository.findByCartId(cartId);
-    }
-
-    @Override
-    public List<CartItem> getCartItemsByAlbumId(Long albumId) {
-        return cartItemRepository.findByAlbumId(albumId);
-    }
-
-    @Override
-    @Transactional
-    public void deleteCartItemsByCartId(Long cartId) {
-        cartItemRepository.deleteByCartId(cartId);
     }
 }

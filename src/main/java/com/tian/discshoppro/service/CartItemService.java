@@ -1,16 +1,14 @@
 package com.tian.discshoppro.service;
 
-import com.tian.discshoppro.model.CartItem;
+import com.tian.discshoppro.model.dto.CartItemDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface CartItemService {
-    List<CartItem> getAllCartItems();
-    Optional<CartItem> getCartItemById(Long id);
-    CartItem createCartItem(CartItem cartItem);
-    CartItem updateCartItem(Long id, CartItem cartItemDetails);
+    List<CartItemDTO> getAllCartItems();
+    Optional<CartItemDTO> getCartItemById(Long id);
+    List<CartItemDTO> getCartItemsByCartId(Long cartId);
+    CartItemDTO createCartItem(CartItemDTO cartItemDTO);
+    CartItemDTO updateCartItem(Long id, CartItemDTO cartItemDTO);
     void deleteCartItem(Long id);
-    List<CartItem> getCartItemsByCartId(Long cartId);
-    List<CartItem> getCartItemsByAlbumId(Long albumId);
-    void deleteCartItemsByCartId(Long cartId);
 }
