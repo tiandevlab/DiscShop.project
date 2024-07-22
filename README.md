@@ -166,3 +166,10 @@ Process:
 - Gained experience in structuring endpoints for different entities
 - Practiced using Spring annotations such as @RestController, @RequestMapping, @GetMapping, etc.
 
+### 2024-07-22
+
+- Refactored the codebase to use DTOs (Data Transfer Objects) for more efficient data transfer and reduced nested responses
+- Fixed user creation 500 error and improved password handling in UserDTO and UserServiceImpl
+- Completed API testing for all endpoints using Postman
+- Created comprehensive documentation for API tests, including request/response examples and test scenarios
+- Enhanced overall code quality and API robustness through thorough testing and bug fixes
