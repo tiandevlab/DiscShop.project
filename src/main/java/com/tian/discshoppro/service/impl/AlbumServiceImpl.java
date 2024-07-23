@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
+import com.tian.discshoppro.exception.AlbumNotFoundException;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
@@ -25,8 +25,9 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Optional<Album> getAlbumById(Long id) {
-        return albumRepository.findById(id);
+    public Album getAlbumById(Long id) {
+        return albumRepository.findById(id)
+                .orElseThrow(() -> new AlbumNotFoundException("Album not found with id: " + id));
     }
 
     @Override

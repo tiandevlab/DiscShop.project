@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface AlbumService {
     List<Album> getAllAlbums();
-    Optional<Album> getAlbumById(Long id);
+    Album getAlbumById(Long id);
     Album createAlbum(Album album);
     Album updateAlbum(Long id, Album albumDetails);
     void deleteAlbum(Long id);
