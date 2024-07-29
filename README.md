@@ -180,3 +180,10 @@ Process:
 - Initialized a new React frontend for the project using Create React App
 - Cleaned up unnecessary files from the default React project structure
 - Began exploring how to integrate React with the existing Spring Boot backend
+
+### 2024-07-29
+
+- Created components folder in the React project structure
+- Implemented HomePage component for the main welcome section
+- Updated App.js to integrate the new HomePage component
+- Keep learning React's structure
