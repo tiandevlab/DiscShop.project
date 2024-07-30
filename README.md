@@ -187,3 +187,9 @@ Process:
 - Implemented HomePage component for the main welcome section
 - Updated App.js to integrate the new HomePage component
 - Keep learning React's structure
+
+### 2024-07-30
+
+- Integrated Bootstrap into the React project
+- Created Header component with navigation using React-Bootstrap
+- Learned about React component structure and the use of React-Bootstrap
