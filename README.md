@@ -193,3 +193,12 @@ Process:
 - Integrated Bootstrap into the React project
 - Created Header component with navigation using React-Bootstrap
 - Learned about React component structure and the use of React-Bootstrap
+
+### 2024-08-01
+
+- Continued learning React fundamentals
+- Created Albums component to display the album catalog
+- Updated App component to integrate the new Albums component
+- Explored and implemented useState and useEffect hooks
+- Practiced using arrow functions and async/await syntax in React components
+- Still in the process of learning and understanding advanced React concepts
