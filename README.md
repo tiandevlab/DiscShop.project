@@ -202,3 +202,14 @@ Process:
 - Explored and implemented useState and useEffect hooks
 - Practiced using arrow functions and async/await syntax in React components
 - Still in the process of learning and understanding advanced React concepts
+
+### 2024-08-04
+
+- Implemented Admin component for album management
+- Integrated Admin component into main App structure
+- Continued learning React, with focus on useState and useEffect hooks:
+- Used useState to manage component state (albums, modal visibility, current album)
+- Implemented useEffect for fetching album data on component mount
+- Practiced making API calls within React components
+- Gained experience with React Bootstrap for styling and layout
+- Enhanced understanding of CRUD operations in a React context
