@@ -1,17 +1,18 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Frank Disc</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">Frank Disc</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#albums">Albums</Nav.Link>
-                        <Nav.Link href="#admin">Admin</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/albums">Albums</Nav.Link>
+                        <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
