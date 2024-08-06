@@ -213,3 +213,11 @@ Process:
 - Practiced making API calls within React components
 - Gained experience with React Bootstrap for styling and layout
 - Enhanced understanding of CRUD operations in a React context
+
+### 2024-08-06
+
+- Implemented React Router for improved navigation in the application
+- Updated App.js to include route configurations for Home, Albums, and Admin pages
+- Modified Header.js to use React Router for navigation between pages
+- Tested and verified correct routing functionality
+- Confirmed that existing Album and Admin components work correctly with new routing structure
