@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Albums() {
     const [albums, setAlbums] = useState([]);
@@ -29,16 +30,21 @@ function Albums() {
                 {albums.map((album) => (
                     <Col key={album.id}>
                         <Card className="h-100">
-                            <Card.Img
-                                variant="top"
-                                src={`images/${album.coverImageName}`}
-                                alt={album.title}
-                            />
+                            <Link to={`/albums/${album.id}`}>
+                                <Card.Img
+                                    variant="top"
+                                    src={`images/${album.coverImageName}`}
+                                    alt={album.title}
+                                />
+                            </Link>
                             <Card.Body>
                                 <Card.Title>{album.title}</Card.Title>
                                 <Card.Text>
                                     {album.artist} - {album.releaseYear}
                                 </Card.Text>
+                                <Link to={`/albums/${album.id}`} className="btn btn-primary">
+                                    View Details
+                                </Link>
                             </Card.Body>
                         </Card>
                     </Col>
