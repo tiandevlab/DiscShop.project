@@ -17,8 +17,13 @@ const ShoppingCart = () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            console.log("Fetched cart items:", data);
-            setCartItems(data);
+            // Fetch album details to get prices
+            const itemsWithPrices = await Promise.all(data.map(async (item) => {
+                const albumResponse = await fetch(`http://localhost:8080/discshoppro/albums/${item.albumId}`);
+                const albumData = await albumResponse.json();
+                return { ...item, price: albumData.price };
+            }));
+            setCartItems(itemsWithPrices);
         } catch (error) {
             console.error("Could not fetch cart items:", error);
         }
@@ -32,16 +37,14 @@ const ShoppingCart = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            fetchCartItems();
+            fetchCartItems(); // Refresh cart items after removal
         } catch (error) {
             console.error("Could not remove item from cart:", error);
         }
     };
 
-    // Note: We'll need to fetch album details separately to get prices
     const calculateTotal = () => {
-        // For now, we can't calculate the total without price information
-        return "N/A";
+        return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
     };
 
     return (
@@ -56,6 +59,8 @@ const ShoppingCart = () => {
                         <tr>
                             <th>Album Title</th>
                             <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -64,6 +69,8 @@ const ShoppingCart = () => {
                             <tr key={item.id}>
                                 <td>{item.albumTitle}</td>
                                 <td>{item.quantity}</td>
+                                <td>${item.price}</td>
+                                <td>${(item.price * item.quantity).toFixed(2)}</td>
                                 <td>
                                     <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>
                                         Remove
@@ -73,7 +80,7 @@ const ShoppingCart = () => {
                         ))}
                         </tbody>
                     </Table>
-                    <h4>Total: {calculateTotal()}</h4>
+                    <h4>Total: ${calculateTotal()}</h4>
                     <Button variant="primary" onClick={() => navigate('/checkout')}>
                         Proceed to Checkout
                     </Button>
