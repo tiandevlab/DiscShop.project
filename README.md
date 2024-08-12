@@ -240,3 +240,10 @@ Process:
 - Updated Albums component to include links to individual album detail pages
 - Enhanced user experience by providing detailed views for each album
 - Integrated new AlbumDetail component into existing React application structure
+
+### 2024-08-12
+- Implemented ShoppingCart component with functionality to display and remove cart items
+- Created Checkout component with payment method selection options
+- Refined UI for ShoppingCart and Checkout pages, improving overall user experience
+- Fixed issues with data fetching and display in ShoppingCart component
+- Gained practical experience in React state management and component styling
