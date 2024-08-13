@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Search from './Search';  // Import the new Search component
 
 function Header() {
     return (
@@ -15,6 +16,7 @@ function Header() {
                         <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
                         <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
                     </Nav>
+                    <Search />  {/* Add the Search component here */}
                 </Navbar.Collapse>
             </Container>
         </Navbar>

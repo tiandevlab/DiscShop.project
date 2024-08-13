@@ -8,6 +8,7 @@ import Admin from './components/Admin';
 import AlbumDetail from './components/AlbumDetail';
 import ShoppingCart from './components/ShoppingCart';
 import Checkout from './components/Checkout';
+import SearchResults from './components/SearchResults';  // Import the new SearchResults component
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/cart" element={<ShoppingCart />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/search" element={<SearchResults />} />  {/* Add this new route */}
                 </Routes>
             </div>
         </Router>
