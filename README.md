@@ -254,3 +254,12 @@ Process:
 - Created SearchResults component to display search results
 - Updated Header component to include the Search feature
 - Modified App.js to add a new route for search results
+
+### 2024-08-15
+
+- Refactored navigation bar to improve user interface
+- Moved Admin link from main navigation to user dropdown menu
+- Created new Profile component to display user information (currently using mock data)
+- Implemented Wishlist component using localStorage for data persistence
+- Updated App.js to include new routes for Profile and Wishlist
+- Continued learning about React component structure and state management
