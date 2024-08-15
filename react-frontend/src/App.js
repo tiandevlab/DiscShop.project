@@ -8,7 +8,9 @@ import Admin from './components/Admin';
 import AlbumDetail from './components/AlbumDetail';
 import ShoppingCart from './components/ShoppingCart';
 import Checkout from './components/Checkout';
-import SearchResults from './components/SearchResults';  // Import the new SearchResults component
+import SearchResults from './components/SearchResults';
+import Profile from './components/Profile';  // Import the new Profile component
+import Wishlist from './components/Wishlist';  // Import the new Wishlist component
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -23,7 +25,9 @@ function App() {
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/cart" element={<ShoppingCart />} />
                     <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/search" element={<SearchResults />} />  {/* Add this new route */}
+                    <Route path="/search" element={<SearchResults />} />
+                    <Route path="/profile" element={<Profile />} />  {/* Add this new route */}
+                    <Route path="/wishlist" element={<Wishlist />} />  {/* Add this new route */}
                 </Routes>
             </div>
         </Router>
