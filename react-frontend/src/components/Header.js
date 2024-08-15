@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Search from './Search';  // Import the new Search component
+import Search from './Search';
 
 function Header() {
     return (
@@ -13,10 +13,17 @@ function Header() {
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/albums">Albums</Nav.Link>
-                        <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
                         <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
                     </Nav>
-                    <Search />  {/* Add the Search component here */}
+                    <Search />
+                    <Nav>
+                        <NavDropdown title="User" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/wishlist">Wishlist</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
