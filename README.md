@@ -263,3 +263,9 @@ Process:
 - Implemented Wishlist component using localStorage for data persistence
 - Updated App.js to include new routes for Profile and Wishlist
 - Continued learning about React component structure and state management
+
+### 2024-08-18
+- Developed Wishlist component with add/remove functionality and UI for displaying items
+- Enhanced AlbumDetail: integrated Wishlist toggle with visual indicators, resolved useEffect dependencies
+- Improved UI with react-bootstrap-icons, addressing module resolution challenges
+- Implemented temporary mock logic for Wishlist to facilitate frontend testing prior to backend completion
