@@ -75,4 +75,16 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public UserDTO login(String username, String password) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getPassword().equals(password)) {  // 注意：实际应用中应使用加密密码
+            return convertToDTO(user);
+        } else {
+            throw new RuntimeException("Invalid password");
+        }
+    }
 }
