@@ -1,3 +1,4 @@
+// src/components/Header.js
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ function Header() {
                     <Nav>
                         <NavDropdown title="User" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/wishlist">Wishlist</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item> {/* Add this new item */}
                             <NavDropdown.Divider />
                             <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
                         </NavDropdown>

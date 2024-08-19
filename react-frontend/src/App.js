@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -9,8 +10,8 @@ import AlbumDetail from './components/AlbumDetail';
 import ShoppingCart from './components/ShoppingCart';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
-import Profile from './components/Profile';  // Import the new Profile component
-import Wishlist from './components/Wishlist';  // Import the new Wishlist component
+import Profile from './components/Profile';
+import Login from './components/Login'; // Import the new Login component
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -26,8 +27,8 @@ function App() {
                     <Route path="/cart" element={<ShoppingCart />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/search" element={<SearchResults />} />
-                    <Route path="/profile" element={<Profile />} />  {/* Add this new route */}
-                    <Route path="/wishlist" element={<Wishlist />} />  {/* Add this new route */}
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/login" element={<Login />} /> {/* Add this new route */}
                 </Routes>
             </div>
         </Router>
