@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext';
 
 function Admin() {
+    const { user } = useAuth();
     const [albums, setAlbums] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [currentAlbum, setCurrentAlbum] = useState({});
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-        // Fetch albums when component mounts
-        fetchAlbums();
-    }, []);
+        if (user && user.roles.includes('ADMIN')) {
+            fetchAlbums();
+        }
+    }, [user]);
+
+    if (!user || !user.roles.includes('ADMIN')) {
+        return <Container className="mt-5"><p>You do not have permission to view this page.</p></Container>;
+    }
 
     const fetchAlbums = async () => {
         try {
