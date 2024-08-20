@@ -1,14 +1,14 @@
-// src/components/Login.js
-
 import React, { useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ const Login = () => {
 
             if (response.ok) {
                 const user = await response.json();
-                localStorage.setItem('user', JSON.stringify(user));
+                login(user);
                 navigate('/'); // Redirect to home page after successful login
             } else {
                 const errorData = await response.text();

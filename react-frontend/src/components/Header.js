@@ -1,10 +1,18 @@
-// src/components/Header.js
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Search from './Search';
+import { useAuth } from '../context/AuthContext';
 
 function Header() {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
@@ -18,12 +26,18 @@ function Header() {
                     </Nav>
                     <Search />
                     <Nav>
-                        <NavDropdown title="User" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item> {/* Add this new item */}
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
-                        </NavDropdown>
+                        {user ? (
+                            <NavDropdown title={`Hello, ${user.username}`} id="basic-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+                                {user.roles.includes('ADMIN') && (
+                                    <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
+                                )}
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                        ) : (
+                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
