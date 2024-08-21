@@ -1,11 +1,62 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Card, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
+
+const appleStyle = {
+    card: {
+        maxWidth: '400px',
+        margin: '50px auto',
+        padding: '30px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        borderRadius: '10px',
+    },
+    title: {
+        fontSize: '24px',
+        fontWeight: '500',
+        marginBottom: '30px',
+        textAlign: 'center',
+    },
+    formGroup: {
+        marginBottom: '20px',
+    },
+    input: {
+        borderRadius: '8px',
+        border: '1px solid #d1d1d1',
+        padding: '12px',
+        fontSize: '16px',
+        width: '100%',
+    },
+    button: {
+        background: '#0071e3',
+        border: 'none',
+        borderRadius: '8px',
+        padding: '12px',
+        fontSize: '16px',
+        fontWeight: '500',
+        width: '100%',
+        marginTop: '10px',
+    },
+    toggleButton: {
+        background: 'transparent',
+        border: 'none',
+        color: '#0071e3',
+        position: 'absolute',
+        right: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 10,
+    },
+    inputGroup: {
+        position: 'relative',
+    },
+};
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -37,38 +88,55 @@ const Login = () => {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
-        <Container className="mt-5">
-            <h2>Login</h2>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </Form.Group>
+        <Container>
+            <Card style={appleStyle.card}>
+                <Card.Body>
+                    <h2 style={appleStyle.title}>Welcome Back</h2>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group style={appleStyle.formGroup}>
+                            <Form.Control
+                                type="text"
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                                style={appleStyle.input}
+                            />
+                        </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </Form.Group>
+                        <Form.Group style={appleStyle.formGroup}>
+                            <div style={appleStyle.inputGroup}>
+                                <Form.Control
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    style={appleStyle.input}
+                                />
+                                <Button
+                                    variant="link"
+                                    onClick={togglePasswordVisibility}
+                                    style={appleStyle.toggleButton}
+                                >
+                                    {showPassword ? <EyeSlash /> : <Eye />}
+                                </Button>
+                            </div>
+                        </Form.Group>
 
-                {error && <Alert variant="danger">{error}</Alert>}
+                        {error && <p className="text-danger">{error}</p>}
 
-                <Button variant="primary" type="submit">
-                    Login
-                </Button>
-            </Form>
+                        <Button variant="primary" type="submit" style={appleStyle.button}>
+                            Sign In
+                        </Button>
+                    </Form>
+                </Card.Body>
+            </Card>
         </Container>
     );
 };
