@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import { Heart, HeartFill, Cart } from 'react-bootstrap-icons';
+import { useAuth } from '../context/AuthContext';
 
 const AlbumDetail = () => {
     const [album, setAlbum] = useState(null);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const { id } = useParams();
+    const { user } = useAuth();
 
     useEffect(() => {
-        // Fetch album details when component mounts
         fetchAlbumDetails();
-        // Check if the album is in the wishlist
-        checkWishlistStatus();
-    }, [id]);
+        if (user) {
+            checkWishlistStatus();
+        }
+    }, [id, user]);
 
     const fetchAlbumDetails = async () => {
         try {
@@ -29,40 +31,30 @@ const AlbumDetail = () => {
     };
 
     const checkWishlistStatus = async () => {
-        try {
-            // This is a mock API call. Replace with your actual API endpoint when available
-            const response = await fetch(`http://localhost:8080/api/wishlist/check/${id}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            setIsInWishlist(data.isInWishlist);
-        } catch (error) {
-            console.error("Could not check wishlist status:", error);
-        }
+        // Implement wishlist check logic here
     };
 
     const toggleWishlist = async () => {
-        try {
-            const method = isInWishlist ? 'DELETE' : 'POST';
-            const response = await fetch(`http://localhost:8080/api/wishlist/${id}`, { method });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            setIsInWishlist(!isInWishlist);
-        } catch (error) {
-            console.error("Could not update wishlist:", error);
-        }
+        // Implement wishlist toggle logic here
     };
 
     const addToCart = async () => {
+        if (!user) {
+            alert('Please log in to add items to your cart.');
+            return;
+        }
+
         try {
-            const response = await fetch('http://localhost:8080/api/cart', {
+            const response = await fetch('http://localhost:8080/api/cart-items', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ albumId: id, quantity: 1 }),
+                body: JSON.stringify({
+                    userId: user.id,
+                    albumId: album.id,
+                    quantity: 1
+                }),
             });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -70,6 +62,7 @@ const AlbumDetail = () => {
             alert('Album added to cart successfully!');
         } catch (error) {
             console.error("Could not add to cart:", error);
+            alert('Failed to add album to cart. Please try again.');
         }
     };
 
