@@ -1,33 +1,44 @@
 package com.tian.discshoppro.service.impl;
 
 import com.tian.discshoppro.model.CartItem;
+import com.tian.discshoppro.model.ShoppingCart;
+import com.tian.discshoppro.model.Album;
+import com.tian.discshoppro.model.User;
 import com.tian.discshoppro.model.dto.CartItemDTO;
 import com.tian.discshoppro.repository.CartItemRepository;
 import com.tian.discshoppro.repository.ShoppingCartRepository;
 import com.tian.discshoppro.repository.AlbumRepository;
+import com.tian.discshoppro.repository.UserRepository;
 import com.tian.discshoppro.service.CartItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
-    @Autowired
-    private CartItemRepository cartItemRepository;
+    private final CartItemRepository cartItemRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
+    private final AlbumRepository albumRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private ShoppingCartRepository shoppingCartRepository;
-
-    @Autowired
-    private AlbumRepository albumRepository;
+    public CartItemServiceImpl(CartItemRepository cartItemRepository,
+                               ShoppingCartRepository shoppingCartRepository,
+                               AlbumRepository albumRepository,
+                               UserRepository userRepository) {
+        this.cartItemRepository = cartItemRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
+        this.albumRepository = albumRepository;
+        this.userRepository = userRepository;
+    }
 
     private CartItemDTO convertToDTO(CartItem cartItem) {
         return new CartItemDTO(
                 cartItem.getId(),
                 cartItem.getCart().getId(),
+                cartItem.getCart().getUser().getId(),
                 cartItem.getAlbum().getId(),
                 cartItem.getAlbum().getTitle(),
                 cartItem.getQuantity()
@@ -64,9 +75,35 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItemDTO createCartItem(CartItemDTO cartItemDTO) {
-        CartItem cartItem = convertToEntity(cartItemDTO);
-        CartItem savedCartItem = cartItemRepository.save(cartItem);
-        return convertToDTO(savedCartItem);
+        User user = userRepository.findById(cartItemDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ShoppingCart cart = shoppingCartRepository.findByUserId(user.getId())
+                .stream().findFirst()
+                .orElseGet(() -> {
+                    ShoppingCart newCart = new ShoppingCart();
+                    newCart.setUser(user);
+                    newCart.setCreatedAt(new Date());
+                    return shoppingCartRepository.save(newCart);
+                });
+
+        Album album = albumRepository.findById(cartItemDTO.getAlbumId())
+                .orElseThrow(() -> new RuntimeException("Album not found"));
+
+        Optional<CartItem> existingItem = cartItemRepository.findByCartIdAndAlbumId(cart.getId(), album.getId());
+        if (existingItem.isPresent()) {
+            CartItem item = existingItem.get();
+            item.setQuantity(item.getQuantity() + cartItemDTO.getQuantity());
+            CartItem updatedItem = cartItemRepository.save(item);
+            return convertToDTO(updatedItem);
+        } else {
+            CartItem newItem = new CartItem();
+            newItem.setCart(cart);
+            newItem.setAlbum(album);
+            newItem.setQuantity(cartItemDTO.getQuantity());
+            CartItem savedItem = cartItemRepository.save(newItem);
+            return convertToDTO(savedItem);
+        }
     }
 
     @Override

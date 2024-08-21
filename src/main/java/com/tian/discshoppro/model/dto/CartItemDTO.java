@@ -3,15 +3,17 @@ package com.tian.discshoppro.model.dto;
 public class CartItemDTO {
     private Long id;
     private Long cartId;
+    private Long userId;  // Add this line
     private Long albumId;
     private String albumTitle;
     private Integer quantity;
 
     public CartItemDTO() {}
 
-    public CartItemDTO(Long id, Long cartId, Long albumId, String albumTitle, Integer quantity) {
+    public CartItemDTO(Long id, Long cartId, Long userId, Long albumId, String albumTitle, Integer quantity) {
         this.id = id;
         this.cartId = cartId;
+        this.userId = userId;
         this.albumId = albumId;
         this.albumTitle = albumTitle;
         this.quantity = quantity;
@@ -31,6 +33,14 @@ public class CartItemDTO {
 
     public void setCartId(Long cartId) {
         this.cartId = cartId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getAlbumId() {
