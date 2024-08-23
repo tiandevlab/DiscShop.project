@@ -126,8 +126,8 @@ const ShoppingCart = () => {
                                 <tr key={item.id}>
                                     <td>{item.albumTitle || 'N/A'}</td>
                                     <td>{item.quantity}</td>
-                                    <td>${price.toFixed(2)}</td>
-                                    <td>${subtotal.toFixed(2)}</td>
+                                    <td>€{price.toFixed(2)}</td>
+                                    <td>€{subtotal.toFixed(2)}</td>
                                     <td>
                                         <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>
                                             Remove
@@ -138,7 +138,7 @@ const ShoppingCart = () => {
                         })}
                         </tbody>
                     </Table>
-                    <h4>Total: ${calculateTotal()}</h4>
+                    <h4>Total: €{calculateTotal()}</h4>
                     <Button variant="primary" onClick={() => navigate('/checkout')}>
                         Proceed to Checkout
                     </Button>

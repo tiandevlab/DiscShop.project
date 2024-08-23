@@ -80,7 +80,7 @@ const AlbumDetail = () => {
                     <h2>{album.title}</h2>
                     <h4>{album.artist}</h4>
                     <p>Release Year: {album.releaseYear}</p>
-                    <p>Price: ${album.price}</p>
+                    <p>Price: €{album.price}</p>
                     <p>Copyright: {album.copyright}</p>
                     <Button variant="primary" className="me-2" onClick={addToCart}>
                         <Cart className="me-2" />
